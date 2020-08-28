@@ -1,6 +1,7 @@
 from flask_restful import Resource, reqparse
 
 from models.investment import InvestmentModel
+from flask_jwt_extended import jwt_required
 
 
 class Investments(Resource):
@@ -8,6 +9,7 @@ class Investments(Resource):
         return {'investments': []}
 
     # Buy investment
+    @jwt_required
     def post(self):
 
         args = reqparse.RequestParser()
