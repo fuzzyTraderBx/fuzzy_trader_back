@@ -2,7 +2,7 @@ from flask import Flask, jsonify
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
 
-from resources.investment import Investments
+from resources.investment import Investments, ListInvestments
 from resources.user import Users, UserLogin, UserLogout
 from blockedlist import BLOCKEDLIST
 
@@ -30,7 +30,7 @@ def invalid_access_token():
     return jsonify({'message': 'You have been logged out'}), 401
 
 
-api.add_resource(Investments, '/investments')
+api.add_resource(Investments, '/investments/<user_id>')
 
 api.add_resource(Users, '/signup')
 
@@ -38,6 +38,7 @@ api.add_resource(UserLogin, '/login')
 
 api.add_resource(UserLogout, '/logout')
 
+api.add_resource(ListInvestments, '/list_investments/<max_price>')
 
 if __name__ == '__main__':
     from sql_alchemy import database
