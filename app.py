@@ -1,9 +1,9 @@
 from flask import Flask, jsonify
 from flask_restful import Api
+from flask_jwt_extended import JWTManager
+
 from resources.investment import Investments
 from resources.user import Users, UserLogin, UserLogout
-from resources.wallet import Wallet
-from flask_jwt_extended import JWTManager
 from blockedlist import BLOCKEDLIST
 
 app = Flask(__name__)
@@ -31,8 +31,6 @@ def invalid_access_token():
 
 
 api.add_resource(Investments, '/investments')
-
-api.add_resource(Wallet, '/wallet')
 
 api.add_resource(Users, '/signup')
 

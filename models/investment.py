@@ -1,3 +1,5 @@
+from sqlalchemy.orm import relationship
+
 from sql_alchemy import database
 
 
@@ -8,6 +10,8 @@ class InvestmentModel(database.Model):
     name = database.Column(database.String(80))
     value = database.Column(database.Float(precision=7))
     is_criptocurrency = database.Column(database.Boolean())
+
+    users = relationship("UserModel", secondary="orders")  # TODO: remove cause may not be used
 
     def __init__(self, id, name, value, is_criptocurrency):
         self.id = id

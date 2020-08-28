@@ -1,3 +1,5 @@
+from sqlalchemy.orm import relationship
+
 from sql_alchemy import database
 
 
@@ -8,6 +10,8 @@ class UserModel(database.Model):
     name = database.Column(database.String(80))
     email = database.Column(database.String(80))
     password = database.Column(database.String(30))
+
+    investments = relationship("InvestmentModel", secondary="orders")
 
     def __init__(self, name, email, password):
         self.name = name
