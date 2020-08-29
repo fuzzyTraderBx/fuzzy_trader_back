@@ -12,10 +12,12 @@ args.add_argument('password', type=str, required=True, help="Required Field!")
 
 
 class Users(Resource):
-
+    # Signup
     def post(self):
 
         data = args.parse_args()
+        print("--------------------lalalallala-------------")
+        print(data)
 
         if UserModel.find(data['email']):
             return {"message": "The email '{}' already exists.".format(data['email'])}, 400
@@ -24,7 +26,7 @@ class Users(Resource):
         # Load with API data
         new_user = UserModel(**data)
         new_user.save_user()
-        return new_user.json()
+        return new_user.json(), 200
 
 
 class UserLogin(Resource):
@@ -34,11 +36,13 @@ class UserLogin(Resource):
         data = args.parse_args()
 
         user = UserModel.find(data['email'])
-
+        print(user)
         if user and safe_str_cmp(user.password, data['password']):
             access_token = create_access_token(identity=user.id)
-            return {'access_token': access_token}, 200
-        return {"message": "Invalid email or password."}, 401
+            return {'access_token': access_token, 'user': {'id': user.id}}, 200
+        elif user:
+            return {'message': "Invalid password"}, 204
+        return {"message": "Invalid email or password."}, 206
 
 
 class UserLogout(Resource):
@@ -48,3 +52,5 @@ class UserLogout(Resource):
         jwt_id = get_raw_jwt()['jti']  # JWT Token Identifier
         BLOCKEDLIST.add(jwt_id)
         return {'message': 'Logged out successfully!'}, 200
+
+

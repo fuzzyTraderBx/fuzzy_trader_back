@@ -41,6 +41,7 @@ class Investments(Resource):
     def post(self, user_id):
 
         user_id = int(user_id)
+        print(user_id)
 
         args = reqparse.RequestParser()
         args.add_argument('investment_key')

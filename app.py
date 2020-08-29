@@ -1,4 +1,5 @@
 from flask import Flask, jsonify
+from flask_cors import CORS
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
 
@@ -7,10 +8,12 @@ from resources.user import Users, UserLogin, UserLogout
 from blockedlist import BLOCKEDLIST
 
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "*"}})
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JWT_SECRET_KEY'] = 'super-secret'  # TODO: hide this
 app.config['JWT_BLACKLIST_ENABLED'] = True
+app.config['CORS_HEADERS'] = 'Content-Type'
 api = Api(app)
 jwt = JWTManager(app)
 
