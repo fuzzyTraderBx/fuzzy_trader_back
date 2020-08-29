@@ -6,11 +6,9 @@ public_key = 'YjUxZDI3MmE3ZmU3NDQwNWE4NmJjMGZjNjgzNTIyMDc'
 secret_key = 'YTZmYzQ5MTRiMDYxNDFlZjhiNzAwYzA2NmQ1MmJmZTU2NmJjZTE2YmRjOTg0YzA3ODg4ZTAyZTAzYzZmMGEwZQ'
 
 restful_client = RestfulClient(secret_key, public_key)
-
+currencies = ['BTCUSD', 'ETHUSD', 'LTCUSD']  # Some currencies
 
 def get_cripto(max_price):
-
-    currencies = ['BTCUSD', 'ETHUSD', 'LTCUSD']  # Some currencies
 
     result = []
 
@@ -27,8 +25,10 @@ def get_cripto(max_price):
 
 
 def retrieve_investment(investment_key):
+    if investment_key in currencies:
+        investment = restful_client.ticker_global_per_symbol(investment_key)
+        investment = InvestmentModel(investment_key, investment["last"], True)
 
-    investment = restful_client.ticker_global_per_symbol(investment_key)
-    investment = InvestmentModel(investment_key, investment["last"], True)
+        return investment
 
-    return investment
+    return None
