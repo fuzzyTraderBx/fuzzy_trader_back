@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_restful import Api
@@ -46,4 +48,6 @@ api.add_resource(ListInvestments, '/list_investments/<max_price>')
 if __name__ == '__main__':
     from sql_alchemy import database
     database.init_app(app)
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
+

@@ -16,8 +16,6 @@ class Users(Resource):
     def post(self):
 
         data = args.parse_args()
-        print("--------------------lalalallala-------------")
-        print(data)
 
         if UserModel.find(data['email']):
             return {"message": "The email '{}' already exists.".format(data['email'])}, 400
