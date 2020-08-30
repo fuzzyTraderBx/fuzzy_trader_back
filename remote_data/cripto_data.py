@@ -4,9 +4,10 @@ import requests
 from bitcoinaverage import RestfulClient
 
 from models.investment import InvestmentModel
+from variables import PUBLIC_KEY, SECRET_KEY, MARKET_ACCESS_KEY
 
-public_key = 'YjUxZDI3MmE3ZmU3NDQwNWE4NmJjMGZjNjgzNTIyMDc'
-secret_key = 'YTZmYzQ5MTRiMDYxNDFlZjhiNzAwYzA2NmQ1MmJmZTU2NmJjZTE2YmRjOTg0YzA3ODg4ZTAyZTAzYzZmMGEwZQ'
+public_key = PUBLIC_KEY
+secret_key = SECRET_KEY
 
 market_stack_url = 'http://api.marketstack.com/v1/tickers/'
 
@@ -19,7 +20,7 @@ stocks = ['MSFT']
 
 def get_cripto(max_price):
     params = {
-        'access_key': '7afb61a152b7ecb2211f70f75508a255',
+        'access_key': MARKET_ACCESS_KEY,
     }
 
     result = []
@@ -65,7 +66,7 @@ def retrieve_investment(investment_key):
         # Searching data from stock api
 
         params = {
-            'access_key': '7afb61a152b7ecb2211f70f75508a255',
+            'access_key': MARKET_ACCESS_KEY,
         }
 
         response = requests.get(market_stack_url + investment_key + '/eod', params=params)
