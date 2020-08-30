@@ -1,8 +1,7 @@
-from flask import jsonify
 from sqlalchemy.orm import relationship, backref
 
-from models.investment import InvestmentModel
-from models.user import UserModel
+from src.models.investment import InvestmentModel
+from src.models.user import UserModel
 from sql_alchemy import database
 
 

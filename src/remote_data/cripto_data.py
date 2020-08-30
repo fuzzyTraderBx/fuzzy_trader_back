@@ -1,9 +1,7 @@
-import datetime
-
 import requests
 from bitcoinaverage import RestfulClient
 
-from models.investment import InvestmentModel
+from src.models.investment import InvestmentModel
 from variables import PUBLIC_KEY, SECRET_KEY, MARKET_ACCESS_KEY
 
 public_key = PUBLIC_KEY

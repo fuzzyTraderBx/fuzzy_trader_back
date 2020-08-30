@@ -1,11 +1,11 @@
 from flask import jsonify
 from flask_restful import Resource, reqparse
 
-from models.investment import InvestmentModel
+from src.models.investment import InvestmentModel
 from flask_jwt_extended import jwt_required
 
-from models.order import Order
-from remote_data.cripto_data import get_cripto, retrieve_investment
+from src.models.order import Order
+from src.remote_data.cripto_data import get_cripto, retrieve_investment
 
 
 class ListInvestments(Resource):
@@ -57,7 +57,6 @@ class Investments(Resource):
             'total': total_investments,
             'investments': investments_dict,
         }
-
 
     @jwt_required
     def post(self, user_id):

@@ -3,7 +3,7 @@ from flask_restful import Resource, reqparse
 from werkzeug.security import safe_str_cmp
 from blockedlist import BLOCKEDLIST
 
-from models.user import UserModel
+from src.models.user import UserModel
 
 args = reqparse.RequestParser()
 args.add_argument('name', type=str)
