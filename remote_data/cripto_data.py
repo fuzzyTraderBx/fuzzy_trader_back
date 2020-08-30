@@ -12,11 +12,15 @@ market_stack_url = 'http://api.marketstack.com/v1/tickers/'
 
 restful_client = RestfulClient(secret_key, public_key)
 currencies = ['BTCUSD', 'ETHUSD', 'LTCUSD']  # Some currencies
-stocks = ['MSFT', 'AAPL', 'AMZN', 'GOOG', 'GOOGL', 'FB', 'VOD', 'INTC', 'CMCSA', 'PEP', 'ADBE', 'CSCO', 'NVDA', 'NFLX',
-          'TSLA', 'COST', 'PYPL', 'AMGN', 'SNY', 'ASML']
+# stocks = ['MSFT', 'AAPL', 'AMZN', 'GOOG', 'GOOGL', 'FB', 'VOD', 'INTC', 'CMCSA', 'PEP', 'ADBE', 'CSCO', 'NVDA', 'NFLX',
+#           'TSLA', 'COST', 'PYPL', 'AMGN', 'SNY', 'ASML']
 
+stocks = ['MSFT']
 
 def get_cripto(max_price):
+    params = {
+        'access_key': '7afb61a152b7ecb2211f70f75508a255',
+    }
 
     result = []
 
@@ -29,6 +33,18 @@ def get_cripto(max_price):
         print('Global Ticker for ' + currency)
         print(price)
 
+    for stock in stocks:
+        response = requests.get(market_stack_url + stock + '/eod', params=params)
+        if response.status_code != 400:
+            response = response.json()
+            response = response['data']
+            stock_historical = response['eod']
+            price = stock_historical[0]['close']
+            print(response['symbol'])
+            if price <= float(max_price):
+                if stock_historical:
+                    investment = InvestmentModel(response['symbol'], price, False)
+                    result.append(investment.json())
     return result
 
 
