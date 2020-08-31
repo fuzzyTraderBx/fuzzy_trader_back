@@ -9,6 +9,7 @@ Fuzzy Trader is an app mixed investment portfolio developed on **Flask/ React** 
  * **[Install](#install)**
 * **[Architecture](#architecture)**
 * **[Endpoints](#endpoints)**
+* **[ExploratoryTests](#tests)**
 
 # Requirements
 
@@ -46,3 +47,26 @@ Below is a schematic of how the solution was thought, according to the peculiari
 | POST | /investments/<user_id> | investment_key | status code |
 | GET | /investments/<user_id> | - | total and list of investments of the user |
 
+# Tests
+## Exploratory Tests with Tourist Metaphor
+
+It's possible to verify informations about that approach at the scientific paper cited bellow: 
+
+```
+@inproceedings{fazzolino2019validation,
+  title={Validation process for services produced by digital transformation},
+  author={Fazzolino, Rafael and Vincenzi, Auri Marcelo Rizzo and Silva, Sara and de Souza, Let{\'\i}cia and Figueiredo, Rejane MC and Ramos, Cristiane Soares and Ribeiro, Luiz Carlos Miyadaira},
+  booktitle={Proceedings of the 29th Annual International Conference on Computer Science and Software Engineering},
+  pages={354--364},
+  year={2019}
+}
+
+```
+
+The test cases were created according to each tour and have the following structure:
+
+[![dsjojR.png](https://iili.io/dsjojR.png)](https://freeimage.host/br)
+
+![dshDYu.md.png](https://iili.io/dshDYu.md.png)
+
+![dsjK3F.md.png](https://iili.io/dsjK3F.md.png)
