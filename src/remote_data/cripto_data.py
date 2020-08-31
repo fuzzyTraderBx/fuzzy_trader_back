@@ -11,12 +11,20 @@ market_stack_url = 'http://api.marketstack.com/v1/tickers/'
 
 restful_client = RestfulClient(secret_key, public_key)
 currencies = ['BTCUSD', 'ETHUSD', 'LTCUSD']  # Some currencies
-# stocks = ['MSFT', 'AAPL', 'AMZN', 'GOOG', 'GOOGL', 'FB', 'VOD', 'INTC', 'CMCSA', 'PEP', 'ADBE', 'CSCO', 'NVDA', 'NFLX',
+
+# Remove some stocks to avoid api exchange limit just for now
+# stocks = ['MSFT', 'AAPL', 'AMZN', 'GOOG', 'GOOGL', 'FB', 'VOD',
+#           'INTC', 'CMCSA', 'PEP', 'ADBE', 'CSCO', 'NVDA', 'NFLX',
 #           'TSLA', 'COST', 'PYPL', 'AMGN', 'SNY', 'ASML']
 
 stocks = ['MSFT']
 
 def get_cripto(max_price):
+    """
+    Method that receive a max price and search and compare to list
+    :param max_price: represents the limit of price
+    :return: a list of possible investments
+    """
     params = {
         'access_key': MARKET_ACCESS_KEY,
     }
@@ -50,9 +58,9 @@ def get_cripto(max_price):
 def retrieve_investment(investment_key):
 
     """
-    I need to search into the api of actions a action "investment_key"
-    :param investment_key:
-    :return:
+    Method that search an investment from api
+    :param investment_key: the name of the investment ('AMZ')
+    :return: investment
     """
 
     if investment_key in currencies:

@@ -6,6 +6,11 @@ from sql_alchemy import database
 
 
 class Order(database.Model):
+
+    """
+    Class that define the order
+    """
+
     __tablename__ = 'orders'
 
     id = database.Column(database.Integer, primary_key=True)
@@ -20,6 +25,9 @@ class Order(database.Model):
         self.investment_id = investment_id
 
     def json(self):
+        """
+        Method that returns a order on json format
+        """
         return {
             'id': self.id,
             'user_id': self.user_id,
@@ -28,14 +36,21 @@ class Order(database.Model):
 
     @classmethod
     def find(cls, user_id):
+        """
+        Method that find and get the order
+        :param user_id:
+        :return: the order or None if it doesn't exists
+        """
         orders = cls.query.filter_by(user_id=user_id)
         if orders:
-            # json_list = [i.json for i in orders.all()]
             json_list = orders.all()
             return json_list
         return None
 
     def save_order(self):
+        """
+        Method that save the order on the database
+        """
         database.session.add(self)
         database.session.commit()
 

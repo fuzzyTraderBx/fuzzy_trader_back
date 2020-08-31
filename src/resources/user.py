@@ -12,8 +12,14 @@ args.add_argument('password', type=str, required=True, help="Required Field!")
 
 
 class Users(Resource):
-    # Signup
+    """
+    Class that define a user endpoint
+    """
     def post(self):
+        """
+        Method that creates a user
+        :return: user
+        """
 
         data = args.parse_args()
 
@@ -28,9 +34,15 @@ class Users(Resource):
 
 
 class UserLogin(Resource):
-
+    """
+    Class that define the user login endpoint
+    """
     @classmethod
     def post(cls):
+        """
+        Method that realizes the login action
+        :return: login
+        """
         data = args.parse_args()
 
         user = UserModel.find(data['email'])
@@ -44,9 +56,15 @@ class UserLogin(Resource):
 
 
 class UserLogout(Resource):
-
+    """
+    Class that realizes the user logout
+    """
     @jwt_required
     def post(self):
+        """
+        Method that include the token in a blocked list making it unavailable
+        :return: status code
+        """
         jwt_id = get_raw_jwt()['jti']  # JWT Token Identifier
         BLOCKEDLIST.add(jwt_id)
         return {'message': 'Logged out successfully!'}, 200
